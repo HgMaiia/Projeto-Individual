@@ -14,7 +14,175 @@ body {
   --tamanho-login: calc(100vh - var(--tamanho-header) - var(--tamanho-footer) - 2px);
   --tamanho-footer: 65px;
 }
+/* Personalização da página inicial */
+.pagina-inicial {
+  background-color: #101010;
+  color: #f5f5f5;
+}
 
+.pagina-inicial .header {
+  background-color: #080808;
+  border-bottom: 3px solid #c8102e;
+}
+
+.pagina-inicial .titulo {
+  color: #ffffff;
+  font-weight: 800;
+}
+
+.pagina-inicial .navbar {
+  width: auto;
+  gap: 20px;
+  padding: 0;
+}
+
+.pagina-inicial .header a {
+  color: #f5f5f5;
+  font-weight: 600;
+}
+
+.pagina-inicial .header a:hover {
+  color: #c8102e;
+}
+
+/* Banner principal */
+.pagina-inicial .banner {
+  min-height: 560px;
+  height: calc(100vh - var(--tamanho-header));
+  color: #ffffff;
+  background-color: #101010;
+  background-image:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.2)),
+    url('../assets/imgs/flamengo-back.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.pagina-inicial .banner .container {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 20px;
+}
+
+.pagina-inicial .banner h2 {
+  max-width: 800px;
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(3rem, 9vw, 7rem);
+  font-weight: 900;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.pagina-inicial .banner p {
+  max-width: 560px;
+  margin: 0;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  line-height: 1.5;
+}
+
+.pagina-inicial .banner-cta {
+  display: inline-block;
+  padding: 14px 22px;
+  border-radius: 5px;
+  background-color: #c8102e;
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.pagina-inicial .banner-cta:hover {
+  background-color: #a30d25;
+}
+
+/* Cartões sobre o projeto */
+.pagina-inicial .social {
+  padding: 70px 0;
+  background-color: #101010;
+  color: #f5f5f5;
+}
+
+.pagina-inicial .social .container {
+  flex-direction: column;
+}
+
+.pagina-inicial .section-title {
+  margin: 0 0 12px;
+  color: #ffffff;
+  font-size: clamp(2rem, 4vw, 3rem);
+  text-transform: uppercase;
+}
+
+.pagina-inicial .social .container .boxes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  padding: 24px 0;
+}
+
+.pagina-inicial .box {
+  align-items: flex-start;
+  padding: 26px;
+  border-top: 4px solid #c8102e;
+  border-radius: 10px;
+  background-color: #1b1b1b;
+}
+
+.pagina-inicial .box h3 {
+  margin: 0 0 12px;
+  color: #ffffff;
+  font-size: 1.4rem;
+}
+
+.pagina-inicial .box p {
+  margin: 0;
+  color: #d2d2d2;
+  line-height: 1.6;
+  text-align: left;
+}
+
+/* Rodapé */
+.pagina-inicial .footer {
+  height: auto;
+  min-height: 90px;
+  border-top: 1px solid #333333;
+  background-color: #080808;
+  color: #d2d2d2;
+}
+
+.pagina-inicial .footer .container {
+  align-items: center;
+}
+
+/* Ajustes para telas menores */
+@media (max-width: 760px) {
+  .pagina-inicial .header {
+    height: auto;
+    min-height: var(--tamanho-header);
+  }
+
+  .pagina-inicial .header .container {
+    height: auto;
+    flex-direction: column;
+    gap: 12px;
+    padding: 14px 0;
+  }
+
+  .pagina-inicial .navbar {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .pagina-inicial .banner {
+    min-height: 500px;
+  }
+
+  .pagina-inicial .social .container .boxes {
+    grid-template-columns: 1fr;
+  }
+}
 .container {
   display: flex;
   width: 80%;
@@ -51,7 +219,7 @@ body {
 }
 
 .titulo {
-  color: #32b9cd;
+  color: #C8102E;
   width: fit-content;
   font-weight: 500;
 }
@@ -65,7 +233,7 @@ body {
 .banner {
   height: var(--tamanho-banner);
   color: white;
-  background-image: url('../assets/imgs/bg-jelly-fish-para-home.png');
+  background-image: url('../assets/imgs/flamengo-back.jpg');
   background-size: cover;
 }
 
@@ -80,10 +248,6 @@ body {
   margin: 0;
   padding: 0;
   font-size: 36px;
-}
-
-.banner .container span {
-  font-weight: 800;
 }
 
 /* MISSÃO VISÃO VALORES */
@@ -131,10 +295,6 @@ body {
 .footer .container {
   justify-content: center;
   text-align: center;
-}
-
-.footer .container .version {
-  font-size: 12px;
 }
 
 /* LOGIN */
@@ -189,16 +349,6 @@ body {
   margin: 0;
 }
 
-.formulario select {
-  border: 2px solid #32b9cd;
-  background-color: white;
-  color: gray;
-  height: 36px;
-  text-align: center;
-  border-radius: 10px;
-  margin: 0;
-}
-
 .campo {
   display: flex;
   flex-direction: column;
@@ -219,16 +369,6 @@ body {
   height: 30px;
   align-self: center;
   margin-top: 20px;
-}
-
-.loading-div {
-  width: 50px;
-  display: none;
-}
-
-.loading-div img {
-  height: 50px;
-  width: 50px;
 }
 
 #div_erros_login {
@@ -259,36 +399,12 @@ body {
   font-size: 20px;
 }
 
-.formulario .tipo_campo {
-  font-size: 20px;
-  font-weight: 600 !important;
-}
-
-.formulario {
-  display: flex;
-  flex-direction: column;
-}
-
 input {
   margin-bottom: 10px;
   border: 2px solid #32b9cd;
   padding: 10px;
   text-align: center;
   border-radius: 10px;
-}
-
-.btn {
-  font-family: "Barlow", sans-serif;
-  border: 0;
-  border-radius: 5px;
-  font-weight: 600;
-  font-size: 18px;
-  padding: 10px 15px;
-  color: white;
-  background-color: #ED145B;
-  width: 120px;
-  align-self: center;
-  margin-top: 5px;
 }
 
 .loading-div {
@@ -314,49 +430,333 @@ input {
   height: var(--tamanho-simulador);
 }
 
-/* ALERTA */
-
-#alerta {
-  position: absolute;
-  right: 0;
-  bottom: 0;
+/* Estilo rubro-negro exclusivo da página de login */
+.pagina-login {
+  background-color: #101010;
+  color: #f5f5f5;
 }
 
-.mensagem-alarme {
-  background-color: white;
-  border-radius: 5px;
-  width: 300px;
-  height: 80px;
-  margin: 10px;
-  padding: 10px 0;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+.pagina-login .header {
+  background-color: #080808;
+  border-bottom: 3px solid #c8102e;
 }
 
-.mensagem-alarme h3 {
-  font-size: 14px;
-  margin: 0;
+.pagina-login .titulo {
+  color: #ffffff;
+  font-weight: 800;
 }
 
-.mensagem-alarme .informacao {
-  width: 66%;
+.pagina-login .navbar {
+  width: auto;
+  gap: 20px;
+  padding: 0;
 }
 
-.alarme-sino {
-  width: 48px;
-  height: 48px;
-  animation-name: bell;
-  animation-duration: 4s;
-  background-image: url('https://cdn-icons-png.flaticon.com/512/1157/1157000.png');
+.pagina-login .header a {
+  color: #f5f5f5;
+  font-weight: 600;
+}
+
+.pagina-login .header a:hover {
+  color: #c8102e;
+}
+
+.pagina-login .login {
+  background-color: #101010;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.72), rgba(25, 0, 5, 0.78)),
+    url('../assets/imgs/flamengo-login.jpg');
+  background-position: center;
   background-size: cover;
-  animation-iteration-count: infinite;
 }
 
-@keyframes bell {
-  0%   {transform: rotate(25deg)}
-  25%  {transform: rotate(-25deg)}
-  50%  {transform: rotate(25deg)}
-  75%  {transform: rotate(-25deg)}
-  100% {transform: rotate(25deg)}
+.pagina-login .card {
+  width: min(460px, 90%);
+  padding: 32px 0;
+  border: 1px solid #353535;
+  border-top: 4px solid #c8102e;
+  background-color: rgba(20, 20, 20, 0.96);
+  color: #f5f5f5;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
+}
+
+.pagina-login .card h2 {
+  color: #ffffff;
+}
+
+.pagina-login .formulario span {
+  color: #f0f0f0;
+}
+
+.pagina-login .formulario input {
+  border: 1px solid #555555;
+  background-color: #0c0c0c;
+  color: #ffffff;
+  text-align: left;
+  padding: 12px;
+}
+
+.pagina-login .formulario input::placeholder {
+  color: #a8a8a8;
+}
+
+.pagina-login .botao {
+  width: 140px;
+  height: auto;
+  padding: 10px 18px;
+  background-color: #c8102e;
+}
+
+.pagina-login .botao:hover {
+  background-color: #a30d25;
+}
+
+.pagina-login .footer {
+  border-top: 1px solid #333333;
+  background-color: #080808;
+}
+
+@media (max-width: 760px) {
+  .pagina-login .header {
+    height: auto;
+    min-height: var(--tamanho-header);
+  }
+
+  .pagina-login .header .container {
+    height: auto;
+    flex-direction: column;
+    gap: 12px;
+    padding: 14px 0;
+  }
+
+  .pagina-login .navbar {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+}
+
+/* Estilo rubro-negro exclusivo da página de cadastro */
+.pagina-cadastro {
+  background-color: #101010;
+  color: #f5f5f5;
+}
+
+.pagina-cadastro .header {
+  background-color: #080808;
+  border-bottom: 3px solid #c8102e;
+}
+
+.pagina-cadastro .titulo {
+  color: #ffffff;
+  font-weight: 800;
+}
+
+.pagina-cadastro .navbar {
+  width: auto;
+  gap: 20px;
+  padding: 0;
+}
+
+.pagina-cadastro .header a {
+  color: #f5f5f5;
+  font-weight: 600;
+}
+
+.pagina-cadastro .header a:hover {
+  color: #c8102e;
+}
+
+.pagina-cadastro .login {
+  height: auto;
+  min-height: calc(100vh - var(--tamanho-header));
+  padding: 36px 0;
+  box-sizing: border-box;
+  background-color: #101010;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.76), rgba(25, 0, 5, 0.82)),
+    url('../assets/imgs/flamengo-login.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
+.pagina-cadastro .login .container {
+  height: auto;
+  min-height: calc(100vh - var(--tamanho-header) - 72px);
+}
+
+.pagina-cadastro .card-cadastro {
+  width: min(560px, 92%);
+  padding: 30px 0;
+  border: 1px solid #353535;
+  border-top: 4px solid #c8102e;
+  background-color: rgba(20, 20, 20, 0.96);
+  color: #f5f5f5;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
+}
+
+.pagina-cadastro .card-cadastro h2 {
+  color: #ffffff;
+}
+
+.pagina-cadastro .formulario span {
+  color: #f0f0f0;
+}
+
+.pagina-cadastro .formulario input {
+  border: 1px solid #555555;
+  background-color: #0c0c0c;
+  color: #ffffff;
+  text-align: left;
+  padding: 12px;
+}
+
+.pagina-cadastro .formulario input::placeholder {
+  color: #a8a8a8;
+}
+
+.pagina-cadastro .botao {
+  width: 150px;
+  height: auto;
+  padding: 10px 18px;
+  background-color: #c8102e;
+}
+
+.pagina-cadastro .botao:hover {
+  background-color: #a30d25;
+}
+
+.pagina-cadastro .card_erro {
+  border-color: #c8102e;
+  background-color: #1b1b1b;
+  color: #ffffff;
+}
+
+.pagina-cadastro .footer {
+  border-top: 1px solid #333333;
+  background-color: #080808;
+}
+
+@media (max-width: 760px) {
+  .pagina-cadastro .header {
+    height: auto;
+    min-height: var(--tamanho-header);
+  }
+
+  .pagina-cadastro .header .container {
+    height: auto;
+    flex-direction: column;
+    gap: 12px;
+    padding: 14px 0;
+  }
+
+  .pagina-cadastro .navbar {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .pagina-cadastro .login .container {
+    min-height: 0;
+  }
+}
+/* Estilo rubro-negro exclusivo da página de simulação */
+.pagina-simulador {
+  background-color: #101010;
+  color: #f5f5f5;
+}
+
+.pagina-simulador .header {
+  background-color: #080808;
+  border-bottom: 3px solid #c8102e;
+}
+
+.pagina-simulador .titulo {
+  color: #ffffff;
+  font-weight: 800;
+}
+
+.pagina-simulador .navbar {
+  width: auto;
+  gap: 20px;
+  padding: 0;
+}
+
+.pagina-simulador .header a {
+  color: #f5f5f5;
+  font-weight: 600;
+}
+
+.pagina-simulador .header a:hover {
+  color: #c8102e;
+}
+
+.pagina-simulador .simulador {
+  height: auto;
+  min-height: calc(100vh - var(--tamanho-header));
+  background-color: #101010;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.78), rgba(20, 0, 4, 0.88)),
+    url('../assets/imgs/flamengo-estadio.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
+.pagina-simulador .simulador .container {
+  width: min(1000px, 90%);
+  height: auto;
+  min-height: calc(100vh - var(--tamanho-header));
+  flex-direction: column;
+  justify-content: center;
+  gap: 18px;
+  overflow: visible;
+  padding: 48px 0;
+  box-sizing: border-box;
+}
+
+.pagina-simulador .simulador h2 {
+  margin: 0 0 8px;
+  color: #ffffff;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  text-transform: uppercase;
+}
+
+.pagina-simulador .simulador p {
+  margin: 0;
+  padding: 20px 24px;
+  border-left: 4px solid #c8102e;
+  border-radius: 6px;
+  background-color: rgba(27, 27, 27, 0.94);
+  color: #dedede;
+  line-height: 1.7;
+}
+
+.pagina-simulador .footer {
+  border-top: 1px solid #333333;
+  background-color: #080808;
+}
+
+@media (max-width: 760px) {
+  .pagina-simulador .header {
+    height: auto;
+    min-height: var(--tamanho-header);
+  }
+
+  .pagina-simulador .header .container {
+    height: auto;
+    flex-direction: column;
+    gap: 12px;
+    padding: 14px 0;
+  }
+
+  .pagina-simulador .navbar {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .pagina-simulador .simulador .container {
+    min-height: 0;
+    padding: 32px 0;
+  }
 }

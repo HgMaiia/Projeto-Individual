@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" />
 </head>
 
-<body class="pagina-cadastro" onload="listar()">
+<body class="pagina-cadastro">
   <!--header inicio-->
   <div class="header">
     <div class="container">
@@ -48,25 +48,34 @@
         
           <div class="campo">
              <span>CPF:</span>
-          <input id="cpf_input" type="text" placeholder="Insira aqui CPF" />
+          <input id="cpf_input" type="text" placeholder="Insira aqui CPF" onkeyup="validarCpf()"/>
+           <span id="validacao_cpf"></span>
           </div>
           
           <div class="campo">
             <span>Nome:</span>
-            <input id="nome_input" type="text" placeholder="Seu nome" />
+            <input id="nome_input" type="text" placeholder="Seu nome" onkeyup="validarNome()">
+            <span id="validacao_nome"></span>
           </div>
+
           <div class="campo">
             <span>E-mail:</span>
-            <input id="email_input" type="text" placeholder="meuemail@provedor.com" />
+            <input id="email_input" type="text" placeholder="meuemail@provedor.com" onkeyup="validarEmail()">
+            <span id="validacao_email"></span>
           </div>
+
           <div class="campo">
             <span>Senha:</span>
-            <input id="senha_input" type="password" placeholder="******" />
+            <input id="senha_input" type="password" placeholder="********" onkeyup="validarSenha(); validarConfirmacaoSenha()">
+            <span id="validacao_senha"></span>
           </div>
+
           <div class="campo">
             <span>Confirmação da Senha:</span>
-            <input id="confirmacao_senha_input" type="password" placeholder="******" />
+            <input id="confirmacao_senha_input" type="password" placeholder="********" onkeyup="validarConfirmacaoSenha()">
+            <span id="validacao_confirmacao"></span>
           </div>
+
           <button class="botao" onclick="cadastrar()">Cadastrar</button>
         </div>
         <div id="div_aguardar" class="loading-div">
@@ -95,6 +104,15 @@
   let listaEmpresasCadastradas = [];
 
   function cadastrar() {
+    if (
+    validarCpf() == false ||
+    validarNome() == false ||
+    validarEmail() == false ||
+    validarSenha() == false ||
+    validarConfirmacaoSenha() == false
+) {
+    return false;
+}
     // aguardar();
 
     //Recupere o valor da nova input pelo nome do id
@@ -104,7 +122,6 @@
     var emailVar = email_input.value;
     var senhaVar = senha_input.value;
     var confirmacaoSenhaVar = confirmacao_senha_input.value;
-    var codigoVar = codigo_input.value;
     var idEmpresaVincular
 
     // Verificando se há algum campo em branco
@@ -113,30 +130,15 @@
       cpfVar == "" ||
       emailVar == "" ||
       senhaVar == "" ||
-      confirmacaoSenhaVar == "" ||
-      codigoVar == ""
+      confirmacaoSenhaVar == "" 
     ) {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
-        "(Mensagem de erro para todos os campos em branco)";
 
+      cardErro.style.display = "block";
+    mensagem_erro.innerHTML = "Preencha todos os campos!";
       finalizarAguardar();
       return false;
     } else {
       setInterval(sumirMensagem, 5000);
-    }
-
-    // Verificando se o código de ativação é de alguma empresa cadastrada
-    for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
-      if (listaEmpresasCadastradas[i].codigo_ativacao == codigoVar) {
-        idEmpresaVincular = listaEmpresasCadastradas[i].id
-        console.log("Código de ativação válido.");
-        break;
-      } else {
-        cardErro.style.display = "block";
-        mensagem_erro.innerHTML = "(Mensagem de erro para código inválido)";
-        finalizarAguardar();
-      }
     }
 
     // Enviando o valor da nova input
@@ -152,27 +154,26 @@
         cpfServer:cpfVar,
         emailServer: emailVar,
         senhaServer: senhaVar,
-        idEmpresaVincularServer: idEmpresaVincular
       }),
     })
       .then(function (resposta) {
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
-          cardErro.style.display = "block";
+    cardErro.style.display = "block";
+    cardErro.classList.add("mensagem_sucesso");
 
-          mensagem_erro.innerHTML =
-            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+    mensagem_erro.innerHTML = "Cadastro concluído!";
 
-          setTimeout(() => {
-            window.location = "login.html";
-          }, "2000");
+    finalizarAguardar();
 
-          limparFormulario();
-          finalizarAguardar();
-        } else {
-          throw "Houve um erro ao tentar realizar o cadastro!";
-        }
+    setTimeout(() => {
+        window.location = "login.html";
+    }, 5000);
+
+} else {
+    throw "Houve um erro ao tentar realizar o cadastro!";
+}
       })
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
@@ -182,27 +183,76 @@
     return false;
   }
 
-  // Listando empresas cadastradas 
-  function listar() {
-    fetch("/empresas/listar", {
-      method: "GET",
-    })
-      .then(function (resposta) {
-        resposta.json().then((empresas) => {
-          empresas.forEach((empresa) => {
-            listaEmpresasCadastradas.push(empresa);
-
-            console.log("listaEmpresasCadastradas")
-            console.log(listaEmpresasCadastradas[0].codigo_ativacao)
-          });
-        });
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-      });
-  }
-
   function sumirMensagem() {
     cardErro.style.display = "none";
   }
+
+  function validarCpf() {
+    var cpf = cpf_input.value;
+
+    if (cpf.length != 11 || isNaN(cpf)) {
+        validacao_cpf.innerHTML = "CPF deve possuir 11 números";
+        return false;
+    } else {
+        validacao_cpf.innerHTML = "CPF válido!";
+        return true;
+    }
+}
+
+function validarNome() {
+    var nome = nome_input.value;
+
+    if (nome.length < 4) {
+        validacao_nome.innerHTML = "Nome deve possuir pelo menos 4 caracteres";
+        return false;
+    } else {
+        validacao_nome.innerHTML = "Nome válido!";
+        return true;
+    }
+}
+
+function validarEmail() {
+    var email = email_input.value;
+
+    if (!email.includes("@")) {
+        validacao_email.innerHTML = "E-mail deve possuir @";
+        return false;
+    } else {
+        validacao_email.innerHTML = "E-mail válido!";
+        return true;
+    }
+}
+
+function validarSenha() {
+    var senha = senha_input.value;
+    var simbolos = "!@#$%&*()-_+=";
+    var temSimbolo = false;
+
+    for (var i = 0; i < senha.length; i++) {
+        if (simbolos.includes(senha[i])) {
+            temSimbolo = true;
+        }
+    }
+
+    if (senha.length < 8 || temSimbolo == false) {
+        validacao_senha.innerHTML = "Senha precisa ter 8 caracteres e 1 símbolo especial";
+        return false;
+    } else {
+        validacao_senha.innerHTML = "Senha válida!";
+        return true;
+    }
+}
+
+function validarConfirmacaoSenha() {
+    var senha = senha_input.value;
+    var confirmacao = confirmacao_senha_input.value;
+
+    if (senha != confirmacao) {
+        validacao_confirmacao.innerHTML = "As senhas não são iguais";
+        return false;
+    } else {
+        validacao_confirmacao.innerHTML = "Senhas iguais!";
+        return true;
+    }
+}
 </script>

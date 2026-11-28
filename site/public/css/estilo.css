@@ -768,7 +768,7 @@ input {
   }
 }
 
-.card_erro.mensagem_sucesso {
+.pagina-cadastro .card_erro.mensagem_sucesso {
     display: block;
     background-color: #d4edda;
     color: #155724;
